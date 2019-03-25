@@ -1,28 +1,47 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react'
+import TodoList from './components/TodoList'
+import TodoForm from './components/TodoForm'
+import TodoData from './todoData'
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
-  }
+    constructor() {
+        super()
+        this.state = {
+            id_count: 4,
+            data: TodoData
+        }
+    }
+    handleTodoClick = id => {
+        this.setState(prevState => {
+            const newData = prevState.data.map(item => {
+                if(item.id === id) {
+                    item.isComplete = !item.isComplete
+                }
+                return item
+            })
+            return {data: newData}
+        })
+    }
+    handleNewTodo = text => {
+        this.setState(prevState => {
+            let newData = [...prevState.data]
+            newData.push({
+                id: prevState.id_count,
+                text: text,
+                isComplete: false
+            })
+            return {data: newData, id_count: prevState.id_count + 1}
+        })
+    }
+    render() {
+        return (
+            <div>
+                <h1>Todo-List App</h1><hr/>
+                <TodoList data={this.state.data} clickHandler={this.handleTodoClick} />
+                <TodoForm submitHandler={this.handleNewTodo}/>
+            </div>
+        )
+    }
 }
 
-export default App;
+export default App
