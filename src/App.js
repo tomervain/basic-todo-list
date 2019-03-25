@@ -8,7 +8,7 @@ class App extends Component {
         super()
         this.state = {
             id_count: 4,
-            data: TodoData
+            data: []
         }
     }
     handleTodoClick = id => {

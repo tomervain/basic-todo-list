@@ -12,14 +12,16 @@ class TodoForm extends Component {
         this.setState({[name]: value})
     }
     handleSubmit = event => {
+        const newText = this.state.text
         event.preventDefault()
-        this.props.submitHandler(this.state.text)
+        this.setState({text: ""})
+        this.props.submitHandler(newText)
     }
     render() {
         return (
             <form onSubmit={this.handleSubmit}>
                 <h3>Add new Todo Item</h3>
-                <input name="text" onChange={this.handleChange}></input>
+                <input name="text" value={this.state.text} onChange={this.handleChange} required={true}></input>
                 <br />
                 <button>Submit</button>
             </form>
