@@ -1,13 +1,12 @@
 import React, {Component} from 'react'
 import TodoList from './components/TodoList'
 import TodoForm from './components/TodoForm'
-import TodoData from './todoData'
 
 class App extends Component {
     constructor() {
         super()
         this.state = {
-            id_count: 4,
+            id_count: 1,
             data: []
         }
     }
